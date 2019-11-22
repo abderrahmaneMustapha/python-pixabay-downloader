@@ -1,0 +1,27 @@
+<Interface>:
+    search : search
+    FloatLayout:
+        cols:1
+
+        FloatLayout:
+            size: root.width, root.height/2
+
+            Label:
+                text: "Search"
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":1}
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+
+            TextInput:
+                pos_hint: {"x":0.1, "top":0.8}
+                size_hint: 0.4, 0.12
+                id: search
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+            Button:
+                pos_hint:{"x":0.2,"y":0.05}
+                size_hint: 0.6, 0.2
+                font_size: (root.width**2 + root.height**2) / 13**4
+                text: "Search"
+            
