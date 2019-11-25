@@ -3,9 +3,9 @@
     FloatLayout:
         cols:3
 
-        FloatLayout:
-            size: root.width, root.height/2
-            id: floatlayout
+       
+        BoxLayout:
+            orientation: 'horizontal'
             Label:
                 text: "Search"
                 size_hint: 0.8, 0.2
@@ -14,16 +14,19 @@
 
 
             TextInput:
-                pos_hint: {"x":0.1, "top":0.8}
+                
                 size_hint: 0.4, 0.1
                 id: search
                 multiline: False
                 font_size: (root.width**2 + root.height**2) / 14**4
             Button:
-                pos_hint:{"x":0.5,"y":0.7}
+                
                 size_hint: 0.2, 0.1
                 font_size: (root.width**2 + root.height**2) / 13**4
                 text: "Search"
                 on_release:                
                     root.find()
-                
+        FloatLayout:
+            size: root.width, root.height/2
+            id: floatlayout
+            

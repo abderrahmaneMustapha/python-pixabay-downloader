@@ -13,7 +13,7 @@ from kivy.uix.image import Image
 
 class Interface(Screen):
     search = ObjectProperty(None)
-    grid_layout = GridLayout(cols=4)
+    grid_layout = GridLayout(cols=4,row_force_default=True, row_default_height=40)
     
     def replace(self,string):
         return string.replace(".txt", ".jpg")
@@ -44,6 +44,7 @@ class Interface(Screen):
                 self.addtogrid( abs_image_file_path)
                 print(abs_image_file_path)                
                 print('true')
+        
         root = self.ids.floatlayout.add_widget(self.grid_layout)
         print(root)
         print("Execution took : "+  str(time.time() - start_time) + " seconds")
