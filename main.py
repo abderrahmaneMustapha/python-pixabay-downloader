@@ -8,13 +8,15 @@ from kivy.uix.button import Button
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
-from kivy.uix.gridlayout import GridLayout 
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.scrollview import ScrollView
 from kivy.uix.image import Image
 
 class Interface(Screen):
     search = ObjectProperty(None)
-    grid_layout = GridLayout(cols=4,row_force_default=True, row_default_height=40)
-    
+    scroll_view =  ScrollView(size_hint=(1, None), size=(200, 100),pos_hint={'top': 0.9})
+    grid_layout =GridLayout(cols=5,row_force_default=True, row_default_height=100,pos_hint={'top': 0.9})
+    scroll_view.add_widget(grid_layout)
     def replace(self,string):
         return string.replace(".txt", ".jpg")
     def addtogrid(self,img):
@@ -22,6 +24,10 @@ class Interface(Screen):
         print(self.grid_layout)
 
     def find(self):
+        root = self.ids.floatlayout
+        root.remove_widget(self.scroll_view)
+        self.grid_layout.clear_widgets()
+
         start_time = time.time()
         #get the text from search text input
         search_text = self.search.text
@@ -45,8 +51,10 @@ class Interface(Screen):
                 print(abs_image_file_path)                
                 print('true')
         
-        root = self.ids.floatlayout.add_widget(self.grid_layout)
-        print(root)
+        
+       
+        root.add_widget(self.scroll_view)
+        print(self.ids.floatlayout.ids)
         print("Execution took : "+  str(time.time() - start_time) + " seconds")
   
     
