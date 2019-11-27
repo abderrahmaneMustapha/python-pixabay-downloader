@@ -14,20 +14,18 @@ from kivy.uix.image import Image
 
 class Interface(Screen):
     search = ObjectProperty(None)
-    scroll_view =  ScrollView(size_hint=(1, None), size=(200, 100),pos_hint={'top': 0.9})
-    grid_layout =GridLayout(cols=5,row_force_default=True, row_default_height=100,pos_hint={'top': 0.9})
-    scroll_view.add_widget(grid_layout)
+    
     def replace(self,string):
         return string.replace(".txt", ".jpg")
     def addtogrid(self,img):
-        self.grid_layout.add_widget(Image(source=img))
-        print(self.grid_layout)
+        root = self.ids.gridlayout
+        root.add_widget(Image(source=img))
+    def no_result(self,count):
+        if count == 0:
+            self.ids.gridlayout.add_widget(Label(text = 'no result '))
 
-    def find(self):
-        root = self.ids.floatlayout
-        root.remove_widget(self.scroll_view)
-        self.grid_layout.clear_widgets()
-
+    def find(self): 
+        self.ids.gridlayout.clear_widgets()   
         start_time = time.time()
         #get the text from search text input
         search_text = self.search.text
@@ -37,7 +35,7 @@ class Interface(Screen):
         
         #get current working directory
         script_dir  = os.path.dirname(os.path.abspath(__file__))
-
+        count = 0
         for rel_path_text in rel_path_text_list:
             #get full path of txt document
             abs_file_path = os.path.join(script_dir, rel_path_text)
@@ -48,13 +46,10 @@ class Interface(Screen):
             if search_text in file_tags:
                 abs_image_file_path = self.replace(abs_file_path)
                 self.addtogrid( abs_image_file_path)
-                print(abs_image_file_path)                
-                print('true')
-        
-        
-       
-        root.add_widget(self.scroll_view)
-        print(self.ids.floatlayout.ids)
+                print(abs_image_file_path)
+                count+=1
+        self.no_result(count)
+        print(count)                   
         print("Execution took : "+  str(time.time() - start_time) + " seconds")
   
     

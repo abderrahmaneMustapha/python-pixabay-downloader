@@ -2,6 +2,7 @@
     search : search
     FloatLayout:
         cols:4
+        row:2
         id: floatlayout
                    
         BoxLayout:
@@ -19,6 +20,18 @@
                 font_size: (root.width**2 + root.height**2) / 13**4
                 text: "Search"
                 on_release:                
-                    root.find()
+                    root.find()       
        
-            
+        ScrollView:
+            size_hint: 1, 0.9
+            pos: (0,100)  
+           
+            GridLayout:
+                id: gridlayout  
+                size_hint_y:None 
+                size: root.width * 1, root.height * 1
+                row_default_height: 120                
+                row_force_default: True            
+                cols: 8
+               
+          
