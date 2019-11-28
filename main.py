@@ -11,6 +11,7 @@ from kivy.properties import ObjectProperty
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.image import Image
+from kivy.uix.textinput import TextInput
 
 class Interface(Screen):
     search = ObjectProperty(None)
@@ -23,7 +24,11 @@ class Interface(Screen):
     def no_result(self,count):
         if count == 0:
             self.ids.gridlayout.add_widget(Label(text = 'no result '))
-
+    def add_labels(self,count,time):
+           
+           image_number    = self.ids.image_number.text.add_widget(TextInput(text= str(count)))
+           #execution_time  = self.ids.execution_time.text    = "execution time "+ str(time)
+           
     def find(self): 
         self.ids.gridlayout.clear_widgets()   
         start_time = time.time()
@@ -49,8 +54,8 @@ class Interface(Screen):
                 print(abs_image_file_path)
                 count+=1
         self.no_result(count)
-        print(count)                   
-        print("Execution took : "+  str(time.time() - start_time) + " seconds")
+        self.add_labels(count,str(time.time() - start_time))                          
+        #print("Execution took : "+  str(time.time() - start_time) + " seconds")
   
     
 
