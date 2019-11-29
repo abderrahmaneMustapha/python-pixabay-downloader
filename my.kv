@@ -33,19 +33,15 @@
                 row_default_height: 120                
                 row_force_default: True            
                 cols: 8
-        Label:
+        FloatLayout:            
+            id : label_widget
             
+        Label:                
             text: 'images number :'
             pos_hint: {'top': 0.65} 
-        Label:
-            id: image_number
-            text: '.... :'
-            pos_hint: {'right': 1.14,'top': 0.65}   
+
         Label:
             text: 'execution time :'
             pos_hint: {'right': 0.58,'top': 0.65}  
-        Label:
-            id: execution_time
-            text: '....'
-            pos_hint: {'right': 0.72,'top': 0.65}  
+        
           

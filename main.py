@@ -15,7 +15,7 @@ from kivy.uix.textinput import TextInput
 
 class Interface(Screen):
     search = ObjectProperty(None)
-    
+    first = True
     def replace(self,string):
         return string.replace(".txt", ".jpg")
     def addtogrid(self,img):
@@ -25,9 +25,18 @@ class Interface(Screen):
         if count == 0:
             self.ids.gridlayout.add_widget(Label(text = 'no result '))
     def add_labels(self,count,time):
+        float_layout = self.ids.label_widget
+        float_layout.clear_widgets()
+    
+        images_number = Label(text=str(count), pos_hint={'right': 1.14,'top': 0.65} )
+        excution_time = Label(text=str(time),pos_hint= {'right': 0.76,'top': 0.65})
+    
+        float_layout.add_widget(images_number)
+        float_layout.add_widget(excution_time)
+        
            
-           image_number    = self.ids.image_number.text.add_widget(TextInput(text= str(count)))
-           #execution_time  = self.ids.execution_time.text    = "execution time "+ str(time)
+                   
+           
            
     def find(self): 
         self.ids.gridlayout.clear_widgets()   
