@@ -1,7 +1,10 @@
+#python
 import os
 import time
 import glob
+from datetime import date
 
+#kivy
 from kivy.app import App 
 from kivy.uix.label import Label
 from kivy.uix.button import Button
@@ -12,6 +15,9 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.image import Image
 from kivy.uix.textinput import TextInput
+
+
+
 
 class Interface(Screen):
     search = ObjectProperty(None)
@@ -33,7 +39,27 @@ class Interface(Screen):
     
         float_layout.add_widget(images_number)
         float_layout.add_widget(excution_time)
-        
+    
+    def create_info_file(self,count,ex_time):
+        read_f = open('info.txt', 'r')       
+        append_f = open('info.txt', 'a')
+        string = ""
+        if read_f.read():
+            string = str(ex_time)+ " \t \t \t \t "+ str(count) +" \t \t \t \t \t \t "+str(date.today())+"\n"
+            append_f.write(string)
+        else:
+            string  = "execution time \t \t \t \t number of images \t \t \t \t \t \t date \n"
+            string += str(ex_time)+ " \t \t \t \t "+ str(count) +" \t \t \t \t \t \t "+str(date.today())+"\n"
+            
+            append_f.write(string)
+
+            
+
+
+                  
+            
+            
+            
            
                    
            
@@ -64,7 +90,7 @@ class Interface(Screen):
                 count+=1
         self.no_result(count)
         self.add_labels(count,str(time.time() - start_time))                          
-        #print("Execution took : "+  str(time.time() - start_time) + " seconds")
+        self.create_info_file(count,str(time.time() - start_time))
   
     
 
