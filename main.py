@@ -45,11 +45,11 @@ class Interface(Screen):
         append_f = open('info.txt', 'a')
         string = ""
         if read_f.read():
-            string = str(ex_time)+ " \t \t \t \t "+ str(count) +" \t \t \t \t \t \t "+str(date.today())+"\n"
+            string = "%12s%20s%40s\n"%(str(ex_time),str(count),str(date.today()))
             append_f.write(string)
         else:
-            string  = "execution time \t \t \t \t number of images \t \t \t \t \t \t date \n"
-            string += str(ex_time)+ " \t \t \t \t "+ str(count) +" \t \t \t \t \t \t "+str(date.today())+"\n"
+            string  ="%12s%30s%36s\n"%(str("execution time"),str("number of images"),str("date"))
+            string += "%12s%20s%40s\n"%(str(ex_time),str(count),str(date.today()))
             
             append_f.write(string)
 
