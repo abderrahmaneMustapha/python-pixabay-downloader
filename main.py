@@ -51,19 +51,8 @@ class Interface(Screen):
             string  ="%12s%30s%36s\n"%(str("execution time"),str("number of images"),str("date"))
             string += "%12s%20s%40s\n"%(str(ex_time),str(count),str(date.today()))
             
-            append_f.write(string)
-
-            
-
-
-                  
-            
-            
-            
-           
-                   
-           
-           
+            append_f.write(string)         
+                       
     def find(self): 
         self.ids.gridlayout.clear_widgets()   
         start_time = time.time()
