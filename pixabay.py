@@ -35,7 +35,7 @@ def main(argv):
         sys.exit('photos number must be <= 200')
        
     # get request safe search enabled
-    SEARCH_URL = URL + "?key=" + API_KEY +"&q="+ QUERY + "&image_type=" + IMAGE_TYPE + "&category=" + CATEGORY + "&safesearch=true" +  "&order=popular" + "&per_page="+str(pics_number)
+    SEARCH_URL = URL + "?key=" + API_KEY +"&q="+ QUERY + "&image_type=" + IMAGE_TYPE + "&category=" + CATEGORY + "&safesearch=true" + "&per_page="+str(pics_number)
     request = requests.get(url =  SEARCH_URL)
     data  = request.json()
 
@@ -59,7 +59,7 @@ def main(argv):
     for image, tags in url_links:
         index+=1
         request = requests.get(image, allow_redirects=False)
-        filename = tp_number+str(index)
+        filename = str(tp_number)+"_"+str(index)
         script_dir = os.path.dirname(os.path.abspath(__file__))
 
         print("saving picture: "+filename+".jpg")

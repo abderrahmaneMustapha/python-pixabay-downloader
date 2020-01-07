@@ -23,24 +23,28 @@
                     root.find()       
        
         ScrollView:
-            size_hint: 1, 0.9
-            pos: (0,100)            
+            size_hint: 1, 0.76
+            pos: (0,100)
+                          
             GridLayout:
                 id: gridlayout  
                 size_hint_y:None 
                 size: root.width * 1, root.height * 1
                 row_default_height: 120                
                 row_force_default: True            
-                cols: 8
+                cols: 2
         FloatLayout:            
             id : label_widget
             
         Label:                
             text: 'images number :'
-            pos_hint: {'top': 0.65} 
+            pos_hint: {'right':0.84,'top': 0.65} 
 
         Label:
             text: 'execution time :'
             pos_hint: {'right': 0.58,'top': 0.65}  
+        Label:
+            text: 'total images number :'
+            pos_hint: {'right': 1.2,'top': 0.65}  
         
           

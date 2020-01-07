@@ -20,8 +20,19 @@ from kivy.uix.textinput import TextInput
 
 
 class Interface(Screen):
+    def __init__(self):
+        super().__init__()
+        self.count_images()
+        
+
     search = ObjectProperty(None)
-    first = True
+    def count_images(self):
+        total =len(self.findText())
+        float_layout = self.ids.label_widget
+        images_number = Label(text=str(total),pos_hint= {'right': 1.3,'top': 0.65})
+        float_layout.add_widget(images_number)
+
+
     def replace(self,string):
         return string.replace(".txt", ".jpg")
     def addtogrid(self,img):
@@ -34,25 +45,27 @@ class Interface(Screen):
         float_layout = self.ids.label_widget
         float_layout.clear_widgets()
     
-        images_number = Label(text=str(count), pos_hint={'right': 1.14,'top': 0.65} )
-        excution_time = Label(text=str(time),pos_hint= {'right': 0.76,'top': 0.65})
+        images_number = Label(text=str(count), pos_hint={'right':0.94,'top': 0.65} )
+        excution_time = Label(text=str(format(float(time), '.5f')),pos_hint= {'right': 0.685,'top': 0.65})
+        self.count_images()
     
         float_layout.add_widget(images_number)
         float_layout.add_widget(excution_time)
     
-    def create_info_file(self,count,ex_time):
+    def create_info_file(self,count,ex_time,query):
         read_f = open('info.txt', 'r')       
         append_f = open('info.txt', 'a')
         string = ""
         if read_f.read():
-            string = "%12s%20s%40s\n"%(str(ex_time),str(count),str(date.today()))
+            string = "%10s%20s%20s%30s\n"%(query,str(format(float(ex_time), '.5f')),str(count),str(date.today()))
             append_f.write(string)
         else:
-            string  ="%12s%30s%36s\n"%(str("execution time"),str("number of images"),str("date"))
-            string += "%12s%20s%40s\n"%(str(ex_time),str(count),str(date.today()))
+            string  ="%12s%20s%25s%20s\n"%("query",str("execution time"),str("number of images"),str("date"))
+            string += "%10s%20s%20s%30s\n"%(query,str(format(float(ex_time), '.5f')),str(count),str(date.today()))
             
             append_f.write(string)         
-                       
+    def findText(self):
+        return [f for f in glob.glob(r"pictures\\*.txt")]          
     def find(self): 
         self.ids.gridlayout.clear_widgets()   
         start_time = time.time()
@@ -60,7 +73,8 @@ class Interface(Screen):
         search_text = self.search.text
 
         #find all txt documents in pictures path
-        rel_path_text_list = [f for f in glob.glob(r"pictures\\*.txt")]
+        rel_path_text_list =self.findText()
+       
         
         #get current working directory
         script_dir  = os.path.dirname(os.path.abspath(__file__))
@@ -74,12 +88,14 @@ class Interface(Screen):
             #search in text file
             if search_text in file_tags:
                 abs_image_file_path = self.replace(abs_file_path)
-                self.addtogrid( abs_image_file_path)
+                self.addtogrid(abs_image_file_path)
                 print(abs_image_file_path)
                 count+=1
+                if count == 10 :
+                    break;
         self.no_result(count)
         self.add_labels(count,str(time.time() - start_time))                          
-        self.create_info_file(count,str(time.time() - start_time))
+        self.create_info_file(count,str(time.time() - start_time),search_text)
   
     
 
