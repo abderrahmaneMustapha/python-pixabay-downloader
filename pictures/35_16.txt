@@ -1,1 +1,1 @@
-baseball, ball, sport
+child, girl, little

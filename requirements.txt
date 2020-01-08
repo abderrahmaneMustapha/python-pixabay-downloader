@@ -1,0 +1,15 @@
+certifi==2019.11.28
+chardet==3.0.4
+docutils==0.15.2
+idna==2.8
+Kivy==1.11.1
+kivy-deps.angle==0.2.0
+kivy-deps.glew==0.2.0
+kivy-deps.gstreamer==0.2.0
+kivy-deps.sdl2==0.2.0
+Kivy-Garden==0.1.4
+Pygments==2.5.2
+pypiwin32==223
+pywin32==227
+requests==2.22.0
+urllib3==1.25.7

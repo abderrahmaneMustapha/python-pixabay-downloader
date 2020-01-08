@@ -53,8 +53,8 @@ class Interface(Screen):
         float_layout.add_widget(excution_time)
     
     def create_info_file(self,count,ex_time,query):
-        read_f = open('info.txt', 'r')       
-        append_f = open('info.txt', 'a')
+        read_f = open('reqtemps.txt', 'r')       
+        append_f = open('reqtemps.txt', 'a')
         string = ""
         if read_f.read():
             string = "%10s%20s%20s%30s\n"%(query,str(format(float(ex_time), '.5f')),str(count),str(date.today()))
@@ -71,11 +71,8 @@ class Interface(Screen):
         start_time = time.time()
         #get the text from search text input
         search_text = self.search.text
-
         #find all txt documents in pictures path
-        rel_path_text_list =self.findText()
-       
-        
+        rel_path_text_list =self.findText()     
         #get current working directory
         script_dir  = os.path.dirname(os.path.abspath(__file__))
         count = 0
@@ -88,11 +85,14 @@ class Interface(Screen):
             #search in text file
             if search_text in file_tags:
                 abs_image_file_path = self.replace(abs_file_path)
+                #add to the grid layout
                 self.addtogrid(abs_image_file_path)
-                print(abs_image_file_path)
+                #enable this lane you will see the full path of the image 
+                #print(abs_image_file_path)
                 count+=1
                 if count == 10 :
                     break;
+
         self.no_result(count)
         self.add_labels(count,str(time.time() - start_time))                          
         self.create_info_file(count,str(time.time() - start_time),search_text)
