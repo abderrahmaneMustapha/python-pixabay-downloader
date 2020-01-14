@@ -1,2 +1,4 @@
        query      execution time         number of images                date
       ball             0.98378                  10                    2020-01-08
+         a             0.31353                  10                    2020-01-14
+         p             0.79265                  10                    2020-01-14
